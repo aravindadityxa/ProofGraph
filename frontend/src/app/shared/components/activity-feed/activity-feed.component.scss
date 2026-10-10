@@ -1,0 +1,81 @@
+.activity-feed {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 32px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    color: #1a1a1a;
+  }
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+  }
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.activity-verification .activity-icon {
+  background: #d1fae5;
+  color: #10b981;
+}
+
+.activity-sync .activity-icon {
+  background: #dbeafe;
+  color: #3b82f6;
+}
+
+.activity-update .activity-icon {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.activity-request .activity-icon {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-message {
+  font-size: 15px;
+  color: #1a1a1a;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.activity-timestamp {
+  font-size: 13px;
+  color: #666;
+}

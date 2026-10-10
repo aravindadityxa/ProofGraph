@@ -1,0 +1,56 @@
+<div class="verification-engine">
+  <h3>Verification Engine</h3>
+  
+  <div class="engine-container">
+    <div class="engine-stages">
+      <div
+        *ngFor="let stage of stages"
+        class="engine-stage"
+        [ngClass]="getStageClass(stage)"
+      >
+        <div class="stage-icon">{{ getStageIcon(stage) }}</div>
+        <div class="stage-label">{{ stage.label }}</div>
+      </div>
+    </div>
+
+    <div class="engine-status">
+      <div *ngIf="loading" class="status-loading">
+        <div class="loading-spinner"></div>
+        <div class="status-text">Fetching records...</div>
+        <div class="status-details">
+          <div class="detail-item">
+            <span class="detail-label">Requested delay:</span>
+            <span class="detail-value">{{ requestDelay }} ms</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Elapsed:</span>
+            <span class="detail-value">{{ elapsedTime.toFixed(2) }} s</span>
+          </div>
+          <div class="detail-info">Asynchronous request in progress</div>
+        </div>
+      </div>
+
+      <div *ngIf="completed && !loading" class="status-completed">
+        <div class="completion-icon">✓</div>
+        <div class="completion-title">VERIFICATION COMPLETE</div>
+        <div class="completion-stats">
+          <div class="stat-item">
+            <div class="stat-value">{{ records.length }}</div>
+            <div class="stat-label">records synchronized</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value verified">{{ verifiedCount }}</div>
+            <div class="stat-label">verified</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value pending">{{ pendingCount }}</div>
+            <div class="stat-label">pending</div>
+          </div>
+        </div>
+        <div class="completion-time">
+          Response time: {{ elapsedTime.toFixed(2) }} s
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

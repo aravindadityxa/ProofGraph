@@ -1,0 +1,47 @@
+<div class="records-section">
+  <h3>Recent Records</h3>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading records...</p>
+  </div>
+
+  <div *ngIf="error && !loading" class="error-state">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error && records.length === 0" class="empty-state">
+    <p>No records found</p>
+  </div>
+
+  <div *ngIf="!loading && !error && records.length > 0" class="table-container">
+    <table class="records-table">
+      <thead>
+        <tr>
+          <th>Record ID</th>
+          <th>Category</th>
+          <th>Organization</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of records">
+          <td class="record-id">{{ record.recordId }}</td>
+          <td>
+            <span class="category-badge">{{ record.category }}</span>
+          </td>
+          <td class="organization">{{ record.organization }}</td>
+          <td class="title">{{ record.title }}</td>
+          <td class="date">{{ formatDate(record.startDate) }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="getStatusClass(record.status)">
+              {{ record.status }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+.admin-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.admin-header {
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: #667eea;
+}
+
+.admin-badge {
+  padding: 4px 12px;
+  background: #667eea;
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-details {
+  text-align: right;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.user-role {
+  font-size: 12px;
+  color: #666;
+}
+
+.btn-logout {
+  padding: 8px 16px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #e9ecef;
+  }
+}
+
+.admin-layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 240px;
+  background: white;
+  border-right: 1px solid #e9ecef;
+  min-height: calc(100vh - 64px);
+  padding: 24px 0;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  color: #495057;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: #f8f9fa;
+    color: #667eea;
+  }
+
+  &.active {
+    background: #f8f9fa;
+    color: #667eea;
+    border-right: 3px solid #667eea;
+  }
+}
+
+.nav-icon {
+  font-size: 8px;
+}
+
+.nav-divider {
+  height: 1px;
+  background: #e9ecef;
+  margin: 16px 24px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 32px;
+  max-width: 1400px;
+}
+
+.placeholder-view {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 48px;
+  text-align: center;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    color: #1a1a1a;
+  }
+
+  p {
+    font-size: 15px;
+    color: #666;
+    margin: 0;
+  }
+}
+
+@media (max-width: 968px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}

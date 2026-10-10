@@ -1,0 +1,130 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1 class="brand">ProofGraph</h1>
+    </div>
+    <div class="header-right">
+      <div class="user-info">
+        <div class="user-details">
+          <div class="user-name">{{ currentUser?.name }}</div>
+          <div class="user-role">{{ currentUser?.role }}</div>
+        </div>
+      </div>
+      <button class="btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <nav class="nav-menu">
+        <a class="nav-item active" routerLink="/dashboard">
+          <span class="nav-icon">●</span>
+          Overview
+        </a>
+        <a class="nav-item" routerLink="/dashboard">
+          <span class="nav-icon">●</span>
+          Identity
+        </a>
+        <a class="nav-item" routerLink="/dashboard">
+          <span class="nav-icon">●</span>
+          Records
+        </a>
+        <a class="nav-item" routerLink="/dashboard">
+          <span class="nav-icon">●</span>
+          Activity
+        </a>
+        <a class="nav-item" *ngIf="currentUser?.role === 'Admin'" routerLink="/admin">
+          <span class="nav-icon">●</span>
+          Admin
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="welcome-section">
+        <h2>Welcome back, {{ currentUser?.name }}</h2>
+        <p class="welcome-subtitle">Track your professional verification journey</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Records</div>
+          <div class="stat-value">{{ totalCount }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Verified</div>
+          <div class="stat-value verified">{{ verifiedCount }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending</div>
+          <div class="stat-value pending">{{ pendingCount }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">{{ currentUser?.status }}</div>
+        </div>
+      </div>
+
+      <div class="verification-journey-section">
+        <h3>Verification Journey</h3>
+        <div class="journey-container">
+          <div class="journey-stages">
+            <div
+              *ngFor="let stage of verificationStages; let i = index"
+              class="journey-stage"
+              [class.selected]="selectedStage === stage"
+              (click)="selectStage(stage)"
+            >
+              <div class="stage-header">
+                <div class="stage-icon" [ngClass]="getStatusClass(stage.status)">
+                  <span *ngIf="stage.status === 'Verified'">✓</span>
+                  <span *ngIf="stage.status === 'Pending'">●</span>
+                  <span *ngIf="stage.status === 'Incomplete'">○</span>
+                </div>
+                <div class="stage-label">{{ stage.label }}</div>
+              </div>
+              <div class="stage-count">{{ stage.count }} records</div>
+              <div class="stage-status" [ngClass]="getStatusClass(stage.status)">
+                {{ stage.status }}
+              </div>
+              <div class="stage-connector" *ngIf="i < verificationStages.length - 1"></div>
+            </div>
+          </div>
+
+          <div class="stage-details" *ngIf="selectedStage">
+            <h4>{{ selectedStage.label }} Records</h4>
+            <div class="stage-records">
+              <div *ngIf="getStageRecords(selectedStage).length === 0" class="empty-state">
+                No {{ selectedStage.label.toLowerCase() }} records found
+              </div>
+              <div
+                *ngFor="let record of getStageRecords(selectedStage)"
+                class="record-item"
+              >
+                <div class="record-title">{{ record.title }}</div>
+                <div class="record-org">{{ record.organization }}</div>
+                <div class="record-status" [ngClass]="getStatusClass(record.status)">
+                  {{ record.status }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-verification-engine
+        [userId]="currentUser?.id || ''"
+        (recordsLoaded)="onRecordsLoaded($event)"
+        (error)="onRecordsError($event)"
+      ></app-verification-engine>
+
+      <app-records-table
+        [records]="records"
+        [loading]="loading"
+        [error]="error"
+      ></app-records-table>
+
+      <app-activity-feed [userId]="currentUser?.id || ''"></app-activity-feed>
+    </main>
+  </div>
+</div>

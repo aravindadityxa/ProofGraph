@@ -1,0 +1,107 @@
+<div class="login-container">
+  <div class="login-left">
+    <div class="login-branding">
+      <h1 class="brand-name">ProofGraph</h1>
+      <p class="brand-tagline">Your professional identity, verified.</p>
+      
+      <div class="verification-stages">
+        <div class="stage">
+          <div class="stage-icon">●</div>
+          <div class="stage-name">Identity</div>
+        </div>
+        <div class="stage-connector"></div>
+        <div class="stage">
+          <div class="stage-icon">●</div>
+          <div class="stage-name">Education</div>
+        </div>
+        <div class="stage-connector"></div>
+        <div class="stage">
+          <div class="stage-icon">●</div>
+          <div class="stage-name">Experience</div>
+        </div>
+        <div class="stage-connector"></div>
+        <div class="stage">
+          <div class="stage-icon">●</div>
+          <div class="stage-name">Employment</div>
+        </div>
+        <div class="stage-connector"></div>
+        <div class="stage">
+          <div class="stage-icon">●</div>
+          <div class="stage-name">Current</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-form-container">
+      <h2>Sign In</h2>
+      <p class="login-subtitle">Access your verification dashboard</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <label for="userId">User ID</label>
+          <input
+            type="text"
+            id="userId"
+            formControlName="userId"
+            class="form-control"
+            [class.invalid]="f['userId'].invalid && f['userId'].touched"
+          />
+          <div class="error-message" *ngIf="f['userId'].invalid && f['userId'].touched">
+            User ID is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control"
+            [class.invalid]="f['password'].invalid && f['password'].touched"
+          />
+          <div class="error-message" *ngIf="f['password'].invalid && f['password'].touched">
+            Password is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select
+            id="role"
+            formControlName="role"
+            class="form-control"
+            [class.invalid]="f['role'].invalid && f['role'].touched"
+          >
+            <option value="">Select your role</option>
+            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+          </select>
+          <div class="error-message" *ngIf="f['role'].invalid && f['role'].touched">
+            Role is required
+          </div>
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <button type="submit" class="btn-login" [disabled]="loading || loginForm.invalid">
+          <span *ngIf="!loading">Sign In</span>
+          <span *ngIf="loading">Signing in...</span>
+        </button>
+      </form>
+
+      <div class="test-credentials">
+        <p class="credentials-title">Test Credentials:</p>
+        <div class="credential-item">
+          <strong>Admin:</strong> admin / admin123
+        </div>
+        <div class="credential-item">
+          <strong>User:</strong> john.doe / password123
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

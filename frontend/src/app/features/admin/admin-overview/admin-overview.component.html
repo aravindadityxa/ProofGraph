@@ -1,0 +1,69 @@
+<div class="admin-overview">
+  <h2>System Overview</h2>
+  <p class="subtitle">Monitor system-wide metrics and activity</p>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading statistics...</p>
+  </div>
+
+  <div *ngIf="!loading" class="overview-content">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value">{{ totalUsers }}</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">📄</div>
+        <div class="stat-value">{{ totalRecords }}</div>
+        <div class="stat-label">Total Records</div>
+      </div>
+
+      <div class="stat-card verified">
+        <div class="stat-icon">✓</div>
+        <div class="stat-value">{{ verifiedRecords }}</div>
+        <div class="stat-label">Verified Records</div>
+      </div>
+
+      <div class="stat-card pending">
+        <div class="stat-icon">●</div>
+        <div class="stat-value">{{ pendingRecords }}</div>
+        <div class="stat-label">Pending Records</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">●</div>
+        <div class="stat-value">{{ activeUsers }}</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">%</div>
+        <div class="stat-value">
+          {{ totalRecords > 0 ? ((verifiedRecords / totalRecords) * 100).toFixed(0) : 0 }}%
+        </div>
+        <div class="stat-label">Verification Rate</div>
+      </div>
+    </div>
+
+    <div class="recent-users">
+      <h3>Recent Users</h3>
+      <div class="user-list">
+        <div *ngFor="let user of users.slice(0, 5)" class="user-item">
+          <div class="user-info">
+            <div class="user-name">{{ user.name }}</div>
+            <div class="user-id">{{ user.userId }}</div>
+          </div>
+          <div class="user-stats">
+            <span class="stat">{{ user.recordCount }} records</span>
+            <span class="status-badge" [class.active]="user.status === 'Active'">
+              {{ user.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="admin-container">
+  <header class="admin-header">
+    <div class="header-left">
+      <h1 class="brand">ProofGraph</h1>
+      <span class="admin-badge">Admin Control Room</span>
+    </div>
+    <div class="header-right">
+      <div class="user-info">
+        <div class="user-details">
+          <div class="user-name">{{ currentUser?.name }}</div>
+          <div class="user-role">{{ currentUser?.role }}</div>
+        </div>
+      </div>
+      <button class="btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <nav class="nav-menu">
+        <a class="nav-item" routerLink="/dashboard">
+          <span class="nav-icon">←</span>
+          Back to Dashboard
+        </a>
+        <div class="nav-divider"></div>
+        <a
+          class="nav-item"
+          [class.active]="activeView === 'overview'"
+          (click)="setActiveView('overview')"
+        >
+          <span class="nav-icon">●</span>
+          Overview
+        </a>
+        <a
+          class="nav-item"
+          [class.active]="activeView === 'users'"
+          (click)="setActiveView('users')"
+        >
+          <span class="nav-icon">●</span>
+          Users
+        </a>
+        <a
+          class="nav-item"
+          [class.active]="activeView === 'records'"
+          (click)="setActiveView('records')"
+        >
+          <span class="nav-icon">●</span>
+          Records
+        </a>
+        <a
+          class="nav-item"
+          [class.active]="activeView === 'activity'"
+          (click)="setActiveView('activity')"
+        >
+          <span class="nav-icon">●</span>
+          Activity
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <app-admin-overview *ngIf="activeView === 'overview'"></app-admin-overview>
+      <app-user-management *ngIf="activeView === 'users'"></app-user-management>
+      <div *ngIf="activeView === 'records'" class="placeholder-view">
+        <h2>Records Management</h2>
+        <p>Records overview and management interface</p>
+      </div>
+      <div *ngIf="activeView === 'activity'" class="placeholder-view">
+        <h2>System Activity</h2>
+        <p>System-wide activity monitoring</p>
+      </div>
+    </main>
+  </div>
+</div>
